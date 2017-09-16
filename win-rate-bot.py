@@ -22,8 +22,8 @@ def generate_reply(w, l):
 	p = w/n
 	stdev = math.sqrt(p*(1-p)/n)
 	return(	"**Wins:** "+str(w)+"\n\n**Losses:** "+str(l)+
-			"\n\nI am about 70% certain that the win rate is **between "+str(round((p-stdev)*100,2))+"% and "+str(round((p+stdev)*100,2))+
-			"%**.\n\n*****\n\n^I ^am ^a ^bot. [^About.](https://example.com)")
+			"\n\nWith a sample size of "+str(n)+", I am about 70% certain that the win rate is **between "+str(round((p-stdev)*100,2))+"% and "+str(round((p+stdev)*100,2))+
+			"%**.\n\n*****\n\n^I ^am ^a ^bot. [^About.](https://github.com/Ziphion/win-rate-bot/blob/master/README.md)")
 
 		
 def get_next_mention():
