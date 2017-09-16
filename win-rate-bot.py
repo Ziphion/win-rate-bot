@@ -10,7 +10,10 @@ import traceback
 import wrbsecret
 					
 def post_reply(reply_md, mention):
-	print("post_reply "+str(mention.permalink(fast=False)))
+	if hasattr(mention, 'permalink'):
+		print("post_reply "+str(mention.permalink(fast=False)))
+	else:
+		print("post_reply")
 	try:
 		mention.reply(reply_md)
 	except APIException as e:
@@ -27,7 +30,7 @@ def generate_reply(w, l):
 
 		
 def get_next_mention():
-	for mention in bot.inbox.mentions(limit=50):
+	for mention in bot.inbox.unread(limit=50):
 		if not mention.new and not include_old_mentions:
 			continue
 		mention.mark_read()
