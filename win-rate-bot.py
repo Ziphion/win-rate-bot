@@ -33,24 +33,15 @@ def get_next_mention():
 		mention.mark_read()
 		return mention
 
-def get_wins(mention):
+def get_wl(mention, regex):
 
 	text = mention.body
 	
 	text.replace(" ","")
-	match = re.search('w=(\d+)', text.replace(" ", "").lower())
+	match = re.search(regex, text.replace(" ", "").lower())
 	if match:
 		return int(match.group(1))
 		
-
-def get_losses(mention):
-
-	text = mention.body
-	
-	text.replace(" ","")
-	match = re.search('l=(\d+)', text.replace(" ", "").lower())
-	if match:
-		return int(match.group(1))
 
 bot = praw.Reddit(	user_agent = 'win-rate-bot v0.1',
 					client_id=wrbsecret.reddit_client_id,
@@ -68,8 +59,8 @@ while True:
 		if mention is None:
 			time.sleep(sleep_time_s)
 			continue
-		w = get_wins(mention)
-		l = get_losses(mention)
+		w = get_wl(mention, 'w=(\d+)')
+		l = get_wl(mention, 'l=(\d+)')
 		if(w is not None and l is not None):
 			reply_md = generate_reply(w, l)
 	except (RequestException, ServerError):
