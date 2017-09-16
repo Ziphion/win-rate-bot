@@ -11,6 +11,8 @@ If you have doubts about this, I've provided a "test" script (test_stdev.py) whe
 
 To call the bot (on any subreddit where it isn't banned), just mention /u/win-rate-bot and include a number of wins and losses, written as W = # and L = # (the bot does not care about upper/lowercase or spaces). Example:
 
-  /u/win-rate-bot
-  w=12
-  l=4
+> /u/win-rate-bot
+> 
+> w=12
+> 
+> l=4
