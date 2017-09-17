@@ -30,8 +30,8 @@ def post_reply(reply_md, mention):
 		
 def generate_reply(w, l):
 	n = w+l
-	p = w/n
-	stdev = math.sqrt(p*(1-p)/n)
+	p = (w+1)/(n+2)
+	stdev = math.sqrt(p*(1-p)/(n+3))
 	return(	"**Wins:** "+str(w)+"\n\n**Losses:** "+str(l)+
 			"\n\nWith a sample size of "+str(n)+", I am about 70% certain that the win rate is **between "+str(round((p-stdev)*100,2))+"% and "+str(round((p+stdev)*100,2))+
 			"%**.\n\n*****\n\n^I ^am ^a ^bot. [^About.](https://github.com/Ziphion/win-rate-bot/blob/master/README.md)")
