@@ -52,6 +52,8 @@ def get_wl(mention, regex):
 	match = re.search(regex, text.replace(" ", "").lower())
 	if match:
 		return int(match.group(1))
+	else:
+		return None
 		
 
 bot = praw.Reddit(	user_agent = 'win-rate-bot v0.1',
@@ -72,15 +74,14 @@ while True:
 			continue
 		w = get_wl(mention, 'w=(\d+)')
 		l = get_wl(mention, 'l=(\d+)')
-		if(w is not None and l is not None):
-			reply_md = generate_reply(w, l)
+		
 	except (RequestException, ServerError):
 		print("Exception "+str(datetime.datetime.utcnow()))
 		time.sleep(30)
 	else:
 		try:
-			if reply_md:
-				post_reply(reply_md, mention)
+			if(w is not None and l is not None):
+				post_reply(generate_reply(w, l), mention)
 		except Exception as e:
 			print("Exception during post_reply:")
 			print(e.__class__, e.__doc__)
