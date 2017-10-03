@@ -2,7 +2,7 @@ import praw
 from praw.exceptions import APIException
 from prawcore.exceptions import RequestException
 from prawcore.exceptions import ServerError
-import math
+from malishoaib_beta import invincompbeta
 import datetime
 import time
 import re
@@ -29,11 +29,10 @@ def post_reply(reply_md, mention):
 			raise e
 		
 def generate_reply(w, l):
-	n = w+l
-	p = (w+1)/(n+2)
-	stdev = math.sqrt(p*(1-p)/(n+3))
+
 	return(	"**Wins:** "+str(w)+"\n\n**Losses:** "+str(l)+
-			"\n\nWith a sample size of "+str(n)+", I am about 70% certain that the win rate is **between "+str(round((p-stdev)*100,2))+"% and "+str(round((p+stdev)*100,2))+
+			"\n\nI can say with 95% confidence that the win rate is **between "+str(round(100*invincompbeta(0.025,w+1,l+1),2))+"% and "+str(round(100*invincompbeta(0.975,w+1,l+1),2))+"%**.\n\n"+
+			"\n\nI can say with 75% confidence that the win rate is **between "+str(round(100*invincompbeta(0.125,w+1,l+1),2))+"% and "+str(round(100*invincompbeta(0.875,w+1,l+1),2))+
 			"%**.\n\n*****\n\n^I ^am ^a ^bot. [^About.](https://github.com/Ziphion/win-rate-bot/blob/master/README.md)")
 
 		
